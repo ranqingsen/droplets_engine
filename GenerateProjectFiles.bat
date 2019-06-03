@@ -7,7 +7,7 @@ SET VSWHERE="%~dp0\Engine\Build\Tools\vswhere\vswhere.exe"
 SET CMAKE="%~dp0\Engine\Build\Tools\cmake-3.14.0-rc1-win64-x64\bin\cmake.exe"
 
 REM Detect latest version of Visual Studio.
-FOR /F "usebackq delims=." %%i IN (`%VSWHERE% -latest -prerelease -requires Microsoft.VisualStudio.Workload.NativeGame -property installationVersion`) DO (
+FOR /F "usebackq delims=." %%i IN (`%VSWHERE% -latest -property installationVersion`) DO (
     SET VS_VERSION=%%i
 )
 
