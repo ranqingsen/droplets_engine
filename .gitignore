@@ -1,3 +1,22 @@
+/Build
+/Binaries
+/Engine/Source/Runtime/DirectXTex/DirectXTex/Shaders/Compiled
+*.pdb
 
-# Ignore External
-/Engine/Externals/**
+CMakeCache.txt
+CMakeFiles
+CMakeScripts
+Testing
+Makefile
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+/build_vs*
+.vs/
+*.aps
+/DX12Lib/inc/GenerateMips_CS.inc
+/Data/Shaders/*.cso
+*.cso
+imgui.ini
+*.nsight-gfxproj
