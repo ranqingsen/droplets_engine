@@ -1,4 +1,4 @@
-#include <Tutorial4.h>
+#include <DX_Tutorial.h>
 
 #include <Application.h>
 #include <CommandQueue.h>
@@ -133,7 +133,7 @@ XMMATRIX XM_CALLCONV LookAtMatrix(FXMVECTOR Position, FXMVECTOR Direction, FXMVE
     return M;
 }
 
-Tutorial4::Tutorial4(const std::wstring& name, int width, int height, bool vSync)
+DX_Tutorial::DX_Tutorial(const std::wstring& name, int width, int height, bool vSync)
     : super(name, width, height, vSync)
     , m_ScissorRect(CD3DX12_RECT(0, 0, LONG_MAX, LONG_MAX))
     , m_Forward(0)
@@ -165,12 +165,12 @@ Tutorial4::Tutorial4(const std::wstring& name, int width, int height, bool vSync
     m_pAlignedCameraData->m_InitialFov = m_Camera.get_FoV();
 }
 
-Tutorial4::~Tutorial4()
+DX_Tutorial::~DX_Tutorial()
 {
     _aligned_free(m_pAlignedCameraData);
 }
 
-bool Tutorial4::LoadContent()
+bool DX_Tutorial::LoadContent()
 {
     auto device = Application::Get().GetDevice();
     auto commandQueue = Application::Get().GetCommandQueue(D3D12_COMMAND_LIST_TYPE_COPY);
@@ -250,8 +250,8 @@ bool Tutorial4::LoadContent()
         // Load the Skybox shaders.
         ComPtr<ID3DBlob> vs;
         ComPtr<ID3DBlob> ps;
-        ThrowIfFailed(D3DReadFileToBlob(L"data/shaders/Tutorial4/Skybox_VS.cso", &vs));
-        ThrowIfFailed(D3DReadFileToBlob(L"data/shaders/Tutorial4/Skybox_PS.cso", &ps));
+        ThrowIfFailed(D3DReadFileToBlob(L"data/shaders/DX_Tutorial/Skybox_VS.cso", &vs));
+        ThrowIfFailed(D3DReadFileToBlob(L"data/shaders/DX_Tutorial/Skybox_PS.cso", &ps));
 
         // Setup the input layout for the skybox vertex shader.
         D3D12_INPUT_ELEMENT_DESC inputLayout[1] = {
@@ -307,8 +307,8 @@ bool Tutorial4::LoadContent()
         // Load the HDR shaders.
         ComPtr<ID3DBlob> vs;
         ComPtr<ID3DBlob> ps;
-        ThrowIfFailed(D3DReadFileToBlob(L"data/shaders/Tutorial4/HDR_VS.cso", &vs));
-        ThrowIfFailed(D3DReadFileToBlob(L"data/shaders/Tutorial4/HDR_PS.cso", &ps));
+        ThrowIfFailed(D3DReadFileToBlob(L"data/shaders/DX_Tutorial/HDR_VS.cso", &vs));
+        ThrowIfFailed(D3DReadFileToBlob(L"data/shaders/DX_Tutorial/HDR_PS.cso", &ps));
 
         // Allow input layout and deny unnecessary access to certain pipeline stages.
         D3D12_ROOT_SIGNATURE_FLAGS rootSignatureFlags =
@@ -379,8 +379,8 @@ bool Tutorial4::LoadContent()
         // Create the SDR PSO
         ComPtr<ID3DBlob> vs;
         ComPtr<ID3DBlob> ps;
-        ThrowIfFailed(D3DReadFileToBlob(L"data/shaders/Tutorial4/HDRtoSDR_VS.cso", &vs));
-        ThrowIfFailed(D3DReadFileToBlob(L"data/shaders/Tutorial4/HDRtoSDR_PS.cso", &ps));
+        ThrowIfFailed(D3DReadFileToBlob(L"data/shaders/DX_Tutorial/HDRtoSDR_VS.cso", &vs));
+        ThrowIfFailed(D3DReadFileToBlob(L"data/shaders/DX_Tutorial/HDRtoSDR_PS.cso", &ps));
 
         CD3DX12_RASTERIZER_DESC rasterizerDesc(D3D12_DEFAULT);
         rasterizerDesc.CullMode = D3D12_CULL_MODE_NONE;
@@ -414,7 +414,7 @@ bool Tutorial4::LoadContent()
     return true;
 }
 
-void Tutorial4::RescaleHDRRenderTarget(float scale)
+void DX_Tutorial::RescaleHDRRenderTarget(float scale)
 {
     uint32_t width = static_cast<uint32_t>(m_Width * scale);
     uint32_t height = static_cast<uint32_t>(m_Height * scale);
@@ -425,7 +425,7 @@ void Tutorial4::RescaleHDRRenderTarget(float scale)
     m_HDRRenderTarget.Resize(width, height);
 }
 
-void Tutorial4::OnResize(ResizeEventArgs& e)
+void DX_Tutorial::OnResize(ResizeEventArgs& e)
 {
     super::OnResize(e);
 
@@ -442,13 +442,13 @@ void Tutorial4::OnResize(ResizeEventArgs& e)
     }
 }
 
-void Tutorial4::UnloadContent()
+void DX_Tutorial::UnloadContent()
 {
 }
 
 static double g_FPS = 0.0;
 
-void Tutorial4::OnUpdate(UpdateEventArgs& e)
+void DX_Tutorial::OnUpdate(UpdateEventArgs& e)
 {
     static uint64_t frameCount = 0;
     static double totalTime = 0.0;
@@ -614,7 +614,7 @@ float ACESFilmicTonemappingPlot(void*, int index)
         ACESFilmicTonemapping(g_TonemapParameters.LinearWhite, g_TonemapParameters.A, g_TonemapParameters.B, g_TonemapParameters.C, g_TonemapParameters.D, g_TonemapParameters.E, g_TonemapParameters.F);
 }
 
-void Tutorial4::OnGUI()
+void DX_Tutorial::OnGUI()
 {
     static bool showDemoWindow = false;
     static bool showOptions = true;
@@ -767,7 +767,7 @@ void XM_CALLCONV ComputeMatrices(FXMMATRIX model, CXMMATRIX view, CXMMATRIX view
     mat.ModelViewProjectionMatrix = model * viewProjection;
 }
 
-void Tutorial4::OnRender(RenderEventArgs& e)
+void DX_Tutorial::OnRender(RenderEventArgs& e)
 {
     super::OnRender(e);
 
@@ -1000,7 +1000,7 @@ void Tutorial4::OnRender(RenderEventArgs& e)
 
 static bool g_AllowFullscreenToggle = true;
 
-void Tutorial4::OnKeyPressed(KeyEventArgs& e)
+void DX_Tutorial::OnKeyPressed(KeyEventArgs& e)
 {
     super::OnKeyPressed(e);
 
@@ -1065,7 +1065,7 @@ void Tutorial4::OnKeyPressed(KeyEventArgs& e)
     }
 }
 
-void Tutorial4::OnKeyReleased(KeyEventArgs& e)
+void DX_Tutorial::OnKeyReleased(KeyEventArgs& e)
 {
     super::OnKeyReleased(e);
 
@@ -1109,7 +1109,7 @@ void Tutorial4::OnKeyReleased(KeyEventArgs& e)
     }
 }
 
-void Tutorial4::OnMouseMoved(MouseMotionEventArgs& e)
+void DX_Tutorial::OnMouseMoved(MouseMotionEventArgs& e)
 {
     super::OnMouseMoved(e);
 
@@ -1128,7 +1128,7 @@ void Tutorial4::OnMouseMoved(MouseMotionEventArgs& e)
 }
 
 
-void Tutorial4::OnMouseWheel(MouseWheelEventArgs& e)
+void DX_Tutorial::OnMouseWheel(MouseWheelEventArgs& e)
 {
     if (!ImGui::GetIO().WantCaptureMouse)
     {

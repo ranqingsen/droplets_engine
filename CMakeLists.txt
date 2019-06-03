@@ -12,6 +12,10 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${BINS}/bin) # Output directory for executabl
 
 project( Droplets LANGUAGES CXX )
 
+# The version number.
+set (ENGINE_VERSION_MAJOR 1)
+set (ENGINE_VERSION_MINOR 0)
+
 # Enable multithreaded builds
 if( MSVC )
     add_compile_options(/MP)
@@ -19,3 +23,8 @@ endif()
 
 add_subdirectory( Engine )
 add_subdirectory( Samples )
+
+# Set the startup project.
+set_directory_properties( PROPERTIES 
+    VS_STARTUP_PROJECT DX_Tutorial
+)

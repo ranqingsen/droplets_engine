@@ -23,7 +23,7 @@
  */
 
 /**
- *  @file Tutorial4.h
+ *  @file DX_Tutorial.h
  *  @date October 24, 2018
  *  @author Jeremiah van Oosten
  *
@@ -44,13 +44,13 @@
 
 #include <DirectXMath.h>
 
-class Tutorial4 : public Game
+class DX_Tutorial : public Game
 {
 public:
     using super = Game;
 
-    Tutorial4(const std::wstring& name, int width, int height, bool vSync = false);
-    virtual ~Tutorial4();
+    DX_Tutorial(const std::wstring& name, int width, int height, bool vSync = false);
+    virtual ~DX_Tutorial();
 
     /**
      *  Load content required for the demo.
