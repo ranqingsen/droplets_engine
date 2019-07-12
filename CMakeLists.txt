@@ -26,5 +26,5 @@ add_subdirectory( Samples )
 
 # Set the startup project.
 set_directory_properties( PROPERTIES 
-    VS_STARTUP_PROJECT DX_Tutorial
+    VS_STARTUP_PROJECT DemoRender
 )

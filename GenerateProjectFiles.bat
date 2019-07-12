@@ -2,6 +2,10 @@
 
 PUSHD %~dp0
 
+REM Delete all the previous solutions
+rd /s /q ".\Build\"
+md Build
+
 REM Update these lines if the currently installed version of Visual Studio is not 2017.
 SET VSWHERE="%~dp0\Engine\Build\Tools\vswhere\vswhere.exe"
 SET CMAKE="%~dp0\Engine\Build\Tools\cmake-3.14.0-rc1-win64-x64\bin\cmake.exe"
